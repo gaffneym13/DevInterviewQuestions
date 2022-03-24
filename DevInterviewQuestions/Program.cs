@@ -14,7 +14,16 @@ namespace DevInterviewQuestions
             var input = new int[][] { new[] { 1, 1, 5, 8 }, new[] { 1, 0, 9, 6 }, new[] { 4, 5, 7, 9 } };
             var output = new int[][] { new[] { 1, 0, 5, 8 }, new[] { 0, 0, 0, 0 }, new[] { 4, 0, 7, 9 } };
 
+            var outputArray = Answer(input);
 
+            Console.Write(Environment.NewLine + Environment.NewLine);
+
+            Console.WriteLine("Sample Solution:");
+            PrintMatrix(output);
+
+            Console.Write(Environment.NewLine + Environment.NewLine);
+            Console.WriteLine("Worked Solution:");
+            PrintMatrix(outputArray);
 
             Console.ReadLine();
         }
@@ -34,10 +43,12 @@ namespace DevInterviewQuestions
             return output;
         }
 
-        public int[][] Answer(int[][] input)
+        public static int[][] Answer(int[][] input)
         {
             var rows = input.Length;
             var columns = input[0].Length;
+
+            var output = input;
 
             var zeroCoordinates = new List<int[]>();
 
@@ -54,7 +65,29 @@ namespace DevInterviewQuestions
 
             foreach (int[] coordinate in zeroCoordinates)
             {
+                output[coordinate[0]] = new[] { 0, 0, 0, 0 };
 
+                for (int i = 0; i < output.Length; i++)
+                {
+                    output[i][coordinate[1]] = 0;
+                }
+            }
+
+            return output;
+        }
+
+        public static void PrintMatrix(int[][] matrix)
+        {
+            var rows = matrix.Length;
+            var columns = matrix[0].Length;
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < columns; j++)
+                {
+                    Console.Write(string.Format("{0} ", matrix[i][j]));
+                }
+                Console.Write(Environment.NewLine + Environment.NewLine);
             }
         }
     }
